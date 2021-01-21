@@ -1,4 +1,4 @@
-# HTML Layout TEST   
+# HTML Layout 정리   
 
 Flex 는 한 방향 레이아웃 시스템이고 (1차원)  
 Grid 는 두 방향(가로-세로) 레이아웃 시스템 (2차원)  
@@ -59,16 +59,346 @@ Grid 라인으로 둘러싸인 사각형 영역으로, 그리드 셀의 집합�
 -----
 
 ### Grid 구현
+`IE 의 경우 -ms- 프리픽스 필요`
+
+```html
+<!-- div.container - Grid Container(그리드 컨테이너) -->
+<div class="container">
+	<!-- div.item - Grid Item(그리드 아이템) -->
+	<div class="item">A</div>
+	<!-- div.item - Grid Item(그리드 아이템) -->
+	<div class="item">B</div>
+	<!-- div.item - Grid Item(그리드 아이템) -->
+	<div class="item">C</div>
+	<!-- div.item - Grid Item(그리드 아이템) -->
+	<div class="item">D</div>
+	<!-- div.item - Grid Item(그리드 아이템) -->
+	<div class="item">E</div>
+	<!-- div.item - Grid Item(그리드 아이템) -->
+	<div class="item">F</div>
+	<!-- div.item - Grid Item(그리드 아이템) -->
+	<div class="item">G</div>
+	<!-- div.item - Grid Item(그리드 아이템) -->
+	<div class="item">H</div>
+	<!-- div.item - Grid Item(그리드 아이템) -->
+	<div class="item">I</div>
+</div>
+```
 
 ```css
 .container {
 	display: grid;
-	/* display: inline-grid; */ /* block과 inline-block의 관계와 비슷 */
 }
 ```
 
+-----
 
+### 그리드 형태 정의
+grid-template-rows  
+grid-template-columns  
+```css
+.container {
+	/* 행(row)의 배치 */
+	grid-template-columns: 200px 200px 500px;
+	/* grid-template-columns: 1fr 1fr 1fr */ /* 1:1:1 비율인 3개의 column을 만들겠다는 의미 */
+	/* grid-template-columns: repeat(3, 1fr) */
+	/* grid-template-columns: 200px 1fr */
+	/* grid-template-columns: 100px 200px auto */
 
+	/* 열(column)의 배치 */
+	grid-template-rows: 200px 200px 500px;
+	/* grid-template-rows: 1fr 1fr 1fr */ /* 1:1:1 비율인 3개의 rows를 만들겠다는 의미 */
+	/* grid-template-rows: repeat(3, 1fr) */
+	/* grid-template-rows: 200px 1fr */
+	/* grid-template-rows: 100px 200px auto */
+}
+```
+
+-----
+
+### repeat 함수  
+repeat는 반복되는 값을 자동으로 처리할 수 있는 함수  
+repeat(반복횟수, 반복값)
+```css
+.container {
+	grid-template-columns: repeat(5, 1fr); /* 1fr 1fr 1fr 1fr 1fr 와 같은 값 */
+
+	/* grid-template-columns: repeat(3, 1fr 4fr 2fr); */
+}
+```
+
+-----
+
+### minmax 함수  
+최솟값과 최댓값을 지정할 수 있는 함수  
+minmax(100px, auto)의 의미는 최소한 100px, 최대는 자동으로(auto)  
+```css
+.container {
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(3, minmax(100px, auto));
+}
+```
+
+-----
+
+### auto-fill 과 auto-fit  
+auto-fill 과 auto-fit 은 column의 개수를 미리 정하지 않고 설정된 너비가 허용하는 한 최대한 셀을 채움  
+```css
+.container {
+	grid-template-columns: repeat(auto-fill, minmax(20%, auto)); /* auto-fill 의 크기를 20% 로 설정했으므로, 1개의 row 에는 5개의 셀이 들어감 */
+}
+```
+
+-----
+
+### 간격 만들기
+row-gap  
+column-gap  
+gap  
+
+```css
+.container {
+	row-gap: 10px; /* row 의 간격을 10px 로 */
+	column-gap: 20px; /* column 의 간격을 20px 로 */
+}
+```
+```css
+.container {
+	gap: 10px 20px; /* row-gap: 10px; column-gap: 20px; */
+}
+```
+```css
+.container {
+	gap: 20px; /* row-gap: 20px; column-gap: 20px; */
+}
+```
+
+-----
+
+### 그리드 형태를 자동으로 정의
+grid-auto-columns  
+grid-auto-rows  
+(아이템 개수를 알 수 없을 때 유용)  
+```css
+.container {
+	grid-auto-rows: minmax(100px, auto);
+}
+```
+
+-----
+
+### 각 셀의 영역 지정
+grid-column-start  
+grid-column-end  
+grid-column  
+grid-row-start  
+grid-row-end  
+grid-row   
+
+이 속성들은 Grid 아이템에 적용하는 속성으로, 각 셀의 영역을 지정  
+column으로 살펴보면, grid-column-start가 시작 번호, grid-column-end가 끝 번호  
+```css
+.item:nth-child(1) {
+	grid-column-start: 1;
+	grid-column-end: 3;
+	grid-row-start: 1;
+	grid-row-end: 2;
+}
+```
+
+시작번호 / 끝번호를 지정하는 방법 외에, `몇 개의 셀을 차지하게 할 것인지를 지정 가능`  
+```css
+.item:nth-child(1) {
+	/* 1번 라인에서 2칸 */
+	grid-column: 1 / span 2;
+	/* 1번 라인에서 3칸 */
+	grid-row: 1 / span 3;
+}
+```
+
+-----
+
+### 영역 이름으로 그리드 정의
+grid-template-areas  
+
+각 영역(Grid Area)에 이름을 붙이고, 그 이름을 이용해서 배치하는 방법  
+```css
+.container {
+	grid-template-areas:
+		/* 각자 차지하는 셀의 개수만큼 해당 위치에 이름을 써주면 됩니다. */
+		"header header header"
+		"   a    main    b   "
+		"   .     .      .   "
+		"footer footer footer";
+}
+```
+
+각 영역의 이름은 해당 아이템 요소에 grid-area 속성으로 이름 매칭
+```css
+.header { grid-area: header; }
+.sidebar-a { grid-area: a; }
+.main-content { grid-area: main; }
+.sidebar-b { grid-area: b; }
+.footer { grid-area: footer; }
+```
+
+-----
+
+### 자동 배치  
+grid-auto-flow  
+
+아이템이 자동 배치되는 흐름을 결정하는 속성  
+```css
+.container {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(25%, auto));
+	grid-template-rows: repeat(5, minmax(50px,auto));
+	grid-auto-flow: dense;
+}
+.item:nth-child(2) { grid-column: auto / span 3; }
+.item:nth-child(5) { grid-column: auto / span 3; }
+.item:nth-child(7) { grid-column: auto / span 2; }
+```
+
+-----
+
+### 세로 방향 정렬
+align-items  
+
+아이템들을 세로(column축) 방향으로 정렬  
+```css
+.container {
+	align-items: stretch;
+	/* align-items: start; */
+	/* align-items: center; */
+	/* align-items: end; */
+}
+```
+
+### 가로 방향 정렬
+justify-items  
+
+아이템들을 가로(row축) 방향으로 정렬  
+```css
+.container {
+	justify-items: stretch;
+	/* justify-items: start; */
+	/* justify-items: center; */
+	/* justify-items: end; */
+}
+```
+
+### place-items
+align-items와 justify-items를 같이 쓸 수 있는 단축 속성
+```css
+.container {
+	place-items: center start;
+}
+```
+
+-----
+
+### 아이템 그룹 세로 정렬
+align-content  
+
+Grid 아이템들의 높이를 모두 합한 값이 Grid 컨테이너의 높이보다 작을 때 Grid 아이템들을 통째로 정렬  
+```css
+.container {
+	align-content: stretch;
+	/* align-content: start; */
+	/* align-content: center; */
+	/* align-content: end; */
+	/* align-content: space-between; */
+	/* align-content: space-around; */
+	/* align-content: space-evenly; */
+}
+```
+
+### 아이템 그룹 가로 정렬  
+justify-content  
+
+Grid 아이템들의 너비를 모두 합한 값이 Grid 컨테이너의 너비보다 작을 때 Grid 아이템들을 통째로 정렬
+```css
+.container {
+	justify-content: stretch;
+	/* justify-content: start; */
+	/* justify-content: center; */
+	/* justify-content: end; */
+	/* justify-content: space-between; */
+	/* justify-content: space-around; */
+	/* justify-content: space-evenly; */
+}
+```
+
+### place-content
+align-content와 justify-content를 같이 쓸 수 있는 단축 속성  
+```css
+.container {
+	place-content: space-between center;
+}
+```
+
+-----
+
+### 개별 아이템 세로 정렬
+align-self  
+
+해당 아이템을 세로(column축) 방향으로 정렬
+```css
+.item {
+	align-self: stretch;
+	/* align-self: start; */
+	/* align-self: center; */
+	/* align-self: end; */
+}
+```
+
+### 개별 아이템 가로 정렬
+justify-self  
+
+해당 아이템을 가로(row축) 방향으로 정렬
+```css
+.item {
+	justify-self: stretch;
+	/* justify-self: start; */
+	/* justify-self: center; */
+	/* justify-self: end; */
+}
+```
+
+### place-self
+align-self와 justify-self를 같이 쓸 수 있는 단축 속성  
+```css
+.item {
+	place-self: start center;
+}
+```
+
+-----
+
+### 배치 순서
+order  
+
+각 아이템들의 시각적 나열 순서를 결정하는 속성  
+```css
+.item:nth-child(1) { order: 3; } 
+.item:nth-child(2) { order: 1; } 
+.item:nth-child(3) { order: 2; } 
+```
+
+-----
+
+### z-index
+z-index로 Z축 정렬  
+(position 에서의 z-index 와 같음)  
+```css
+.item:nth-child(5) {
+	z-index: 1;
+	transform: scale(2);
+}
+```
+
+-----
 -----
 
 ## Flex
