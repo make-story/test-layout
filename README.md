@@ -33,28 +33,30 @@ https://brunch.co.kr/@blackindigo-red/8
 ### Grid 용어
 
 - 그리드 컨테이너 (Grid Container)
-display: grid를 적용하는, Grid의 전체 영역입니다. Grid 컨테이너 안의 요소들이 Grid 규칙의 영향을 받아 정렬된다고 생각하면 됩니다. 위 코드 <div class=”container”></div>가 Grid 컨테이너에요.
+display: grid 를 적용하는, `Grid의 전체 영역 (Grid 를 감싸는 것)`  
+Grid 컨테이너 안의 요소들이 Grid 규칙의 영향을 받아 정렬된다고 생각하면 됨  
 
 - 그리드 아이템 (Grid Item)
-Grid 컨테이너의 자식 요소들입니다. 바로 이 아이템들이 Grid 규칙에 의해 배치되는 거에요. 위 코드에서 <div class=”item”></div>들이 Grid 아이템입니다.
+Grid 컨테이너의 `자식 요소들`
+이 아이템들이 Grid 규칙에 의해 배치 됨   
 
 - 그리드 트랙 (Grid Track)
-Grid의 행(Row) 또는 열(Column)
+Grid의 `행(Row) 또는 열(Column)`  
 
 - 그리드 셀 (Grid Cell)
-Grid의 한 칸을 가리키는 말이에요. <div>같은 실제 html 요소는 그리드 아이템이고, 이런 Grid 아이템 하나가 들어가는 “가상의 칸(틀)”이라고 생각하면 됩니다.
+Grid의 `한 칸`을 가리킴
 
 - 그리드 라인(Grid Line)
-Grid 셀을 구분하는 선입니다.
+Grid `셀을 구분하는 선`  
 
 - 그리드 번호(Grid Number)
-Grid 라인의 각 번호입니다.
+Grid `라인의 각 번호`  
 
 - 그리드 갭(Grid Gap)
-Grid 셀 사이의 간격입니다.
+Grid `셀 사이의 간격`  
 
 - 그리드 영역(Grid Area)
-Grid 라인으로 둘러싸인 사각형 영역으로, 그리드 셀의 집합이에요.
+Grid `라인으로 둘러싸인 사각형 영역`으로, 그리드 셀의 집합    
 
 -----
 
