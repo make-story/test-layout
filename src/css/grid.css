@@ -1,0 +1,167 @@
+/* https://studiomeal.com/archives/533 */
+
+.grid-container {
+	display: grid;
+	padding: 5px;
+	gap: 10px; /* row-gap: 10px; column-gap: 10px; */
+}
+.grid-item {
+	border: 1px solid #222;
+}
+
+/* 모바일 */
+@media (max-width: 767px) {
+	.grid-container {
+		grid-template-columns: repeat(3, 1fr);
+		grid-auto-rows: minmax(90px, auto);
+	}
+}
+/* 태블릿 */
+@media (min-width: 768px) and (max-width: 1023px) {
+	.grid-container {
+		/* PC 기준 최대 9개, 태블릿 최대 6개, 모바일 최소 3개 / auto */
+		grid-template-columns: repeat(6, 90px); 
+		grid-auto-rows: minmax(auto, 90px);
+	}
+
+	.grid-item:nth-child(1) {
+		grid-column: auto / span 6; /* 자동 배치(auto) / 6칸 */
+		grid-row: auto / span 2; /* 자동 배치(auto) / 2칸 */
+	}
+
+	.grid-item:nth-child(2) {
+		grid-column: auto / span 3; /* 자동 배치(auto) / 3칸 */
+		grid-row: auto / span 2; /* 자동 배치(auto) / 2칸 */
+	}
+	.grid-item:nth-child(3) {
+		grid-column: auto / span 3;
+		grid-row: auto / span 2;
+	}
+
+	.grid-item:nth-child(4) {
+		grid-column: auto / span 3; 
+		grid-row: auto / span 4; 
+	}
+	.grid-item:nth-child(5) {
+		grid-column: auto / span 3;
+		grid-row: auto / span 2;
+	}
+	.grid-item:nth-child(6) {
+		grid-column: auto / span 3;
+		grid-row: auto / span 2;
+	}
+
+	.grid-item:nth-child(7) {
+		grid-column: auto / span 6;
+		grid-row: auto / span 2;
+	}
+
+	.grid-item:nth-child(8) {
+		grid-column: auto / span 3;
+		grid-row: auto / span 2;
+	}
+	.grid-item:nth-child(9) {
+		grid-column: auto / span 3;
+		grid-row: auto / span 2;
+	}
+	
+	.grid-item:nth-child(10) {
+		grid-column: auto / span 3; 
+		grid-row: auto / span 2; 
+	}
+	.grid-item:nth-child(11) {
+		grid-column: auto / span 3; 
+		grid-row: auto / span 2; 
+	}
+
+	.grid-item:nth-child(12) {
+		grid-column: auto / span 3; 
+		grid-row: auto / span 2; 
+	}
+	.grid-item:nth-child(13) {
+		grid-column: auto / span 3; 
+		grid-row: auto / span 2; 
+	}
+
+	.grid-item:nth-child(14) {
+		grid-column: auto / span 3; 
+		grid-row: auto / span 2; 
+	}
+	.grid-item:nth-child(15) {
+		grid-column: auto / span 3; 
+		grid-row: auto / span 2; 
+	}
+}
+/* 데스크탑 */
+@media (min-width: 1024px) {
+	.grid-container {
+		/* PC 기준 최대 9개, 태블릿 최대 6개, 모바일 최소 3개 / auto */
+		grid-template-columns: repeat(9, 90px); 
+		grid-auto-rows: minmax(auto, 90px);
+	}
+
+	.grid-item:nth-child(1) {
+		grid-column: 1 / span 6; /* 1번 라인에서 6칸 */
+		grid-row: 1 / span 2; /* 1번 라인에서 2칸 */
+	}
+	.grid-item:nth-child(2) {
+		grid-column: 7 / span 3; /* 7번 라인에서 3칸 */
+		grid-row: 1 / span 2; /* 1번 라인에서 2칸 */
+	}
+	
+	.grid-item:nth-child(3) {
+		grid-column: 1 / span 3; /* 1번 라인에서 3칸 */
+		grid-row: 3 / span 2; /* 3번 라인에서 2칸 */
+	}
+	.grid-item:nth-child(4) {
+		grid-column: 4 / span 3; /* 4번 라인에서 3칸 */
+		grid-row: 3 / span 2; /* 3번 라인에서 2칸 */
+	}
+	.grid-item:nth-child(5) {
+		grid-column: 7 / span 3; /* 7번 라인에서 3칸 */
+		grid-row: 3 / span 2; /* 3번 라인에서 2칸 */
+	}
+	
+	.grid-item:nth-child(6) {
+		grid-column: 1 / span 3; /* 1번 라인에서 3칸 */
+		grid-row: 5 / span 4; /* 5번 라인에서 4칸 */
+	}
+	.grid-item:nth-child(7) {
+		grid-column: 4 / span 6; /* 4번 라인에서 4칸 */
+		grid-row: 5 / span 2; /* 5번 라인에서 2칸 */
+	}
+	.grid-item:nth-child(8) {
+		grid-column: 4 / span 3; /* 4번 라인에서 3칸 */
+		grid-row: 7 / span 2; /* 7번 라인에서 2칸 */
+	}
+	.grid-item:nth-child(9) {
+		grid-column: 7 / span 3; /* 7번 라인에서 3칸 */
+		grid-row: 7 / span 2; /* 7번 라인에서 2칸 */
+	}
+	
+	.grid-item:nth-child(10) {
+		grid-column: 1 / span 3; 
+		grid-row: 9 / span 2; 
+	}
+	.grid-item:nth-child(11) {
+		grid-column: 4 / span 3; 
+		grid-row: 9 / span 2; 
+	}
+	.grid-item:nth-child(12) {
+		grid-column: 7 / span 3; 
+		grid-row: 9 / span 2; 
+	}
+	
+	.grid-item:nth-child(13) {
+		grid-column: 1 / span 3; 
+		grid-row: 11 / span 2; 
+	}
+	.grid-item:nth-child(14) {
+		grid-column: 4 / span 3; 
+		grid-row: 11 / span 2; 
+	}
+	.grid-item:nth-child(15) {
+		grid-column: 7 / span 3; 
+		grid-row: 11 / span 2; 
+	}
+}
